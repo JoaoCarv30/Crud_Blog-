@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Crud_Blog.Repositories
 {
-    public class PostRepository
+    public class PostRepository 
     {
         private readonly CrudBlogContext _context;
         
