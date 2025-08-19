@@ -1,67 +1,61 @@
 ﻿using Crud_Blog.Context;
 using Crud_Blog.Entities;
+using Crud_Blog.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Crud_Blog.Controllers;
 
-
 [Route("[controller]")]
 [ApiController]
-
 public class CommentController : ControllerBase
 {
-    private readonly CrudBlogContext _context;
+    private readonly CommentService _commentService;
 
-    public CommentController(CrudBlogContext context)
+    public CommentController(CommentService commentService)
     {
-        _context = context;
+        _commentService = commentService;
     }
-    
+
     [HttpPost]
-    public async Task<IActionResult> CreateComment( Comment? comment)
+    public async Task<IActionResult> CreateComment(Comment? comment)
     {
-        if (comment == null) return BadRequest("Comment cannot be null");
-        await _context.Comment.AddAsync(comment);
-        await _context.SaveChangesAsync();
-        return Ok (comment);
+        await _commentService.CreateComment(comment); 
+        return Ok();
     }
-    
+
     [HttpGet]
     public async Task<IActionResult> GetAllComents()
     {
-        var comments = await _context.Comment.ToListAsync();
-        if (!comments.Any())
-            return NotFound("No comments found");
-        return Ok(comments);
+      var Comments =  await _commentService.GetAllComments(); 
+      return Ok(Comments);
     }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetCommentById(Guid id)
     {
-        var comment =  await _context.Comment.FindAsync(id);
-        if (comment == null)
-            return NotFound("No comment found for this post");
-        return Ok(comment);
+        var Comment =  await _commentService.GetCommentById(id); 
+        return Ok(Comment);
     }
-    
+
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(Guid id, Comment? dto)
     {
-        var comment = await _context.Comment.FindAsync(id);
-        if (comment == null)
-            return NotFound("No comment found for this post");
-        comment.Description = dto.Description;
-        return Ok(comment);
-    }
-    
+        var Comment =  await _commentService.GetCommentById(id); 
+        if (Comment == null)
+            return NotFound("No comment found for this post"); 
+        Comment.Description = dto.Description;
+        var updatedComment = await _commentService.UpdateComment(id, Comment);
+        return Ok(updatedComment);
+    } 
+
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(Guid id)
     {
-        var comment = await _context.Comment.FindAsync(id);
-        if (comment == null)
-            return NotFound("No comment found for this post");
-        return Ok(comment);
+        var Comment =  await _commentService.GetCommentById(id); 
+        if (Comment == null)
+            return NotFound("No comment found for this post"); 
+        await _commentService.DeleteComment(id);
+        return NoContent();
     }
-    
-}
+} 

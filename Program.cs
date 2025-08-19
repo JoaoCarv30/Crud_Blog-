@@ -1,4 +1,6 @@
 using Crud_Blog.Context;
+using Crud_Blog.Repositories;
+using Crud_Blog.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,21 +12,34 @@ builder.Services.AddControllers()
     {
         opt.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
     });
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+
+
+builder.Services.AddScoped<UserRepository>();
+builder.Services.AddScoped<UserService>();
+
+builder.Services.AddScoped<PostRepository>();
+builder.Services.AddScoped<PostService>();
+
+builder.Services.AddScoped<CommentRepository>();
+builder.Services.AddScoped<CommentService>();
+
+
 builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen();
 
 var MySqlConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<CrudBlogContext>(options => options.UseMySql(MySqlConnectionString,  ServerVersion.AutoDetect(MySqlConnectionString)));
+builder.Services.AddDbContext<CrudBlogContext>(options =>
+    options.UseMySql(MySqlConnectionString, ServerVersion.AutoDetect(MySqlConnectionString)));
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
     app.UseSwagger();
-    app.UseSwaggerUI(options => 
+    app.UseSwaggerUI(options =>
     {
         options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
         options.RoutePrefix = string.Empty;
