@@ -1,49 +1,51 @@
 ﻿using Crud_Blog.Context;
 using Crud_Blog.Entities;
 using Crud_Blog.Repositories;
+using Crud_Blog.Repositories.Interfaces;
 
 namespace Crud_Blog.Services
 {
     public class PostService
     {
-        private readonly PostRepository _postRepository;
-        private readonly IGenericRepository<Post> _genericRepository;
-        public PostService(PostRepository postRepository, IGenericRepository<Post> genericRepository)
+        private readonly IPostRepository _postRepository;
+        public PostService(IPostRepository postRepository)
         {
             _postRepository = postRepository;
-            _genericRepository = genericRepository;
         }
-        
         
         public async Task<Post> CreatePost(Post post)
         {
-            return await _genericRepository.Create(post);
+            return await _postRepository.Create(post);
         }
         
         public async Task<List<Post>> GetAllPosts()
         {
-            return await _genericRepository.GetAll();
+            return await _postRepository.GetAll();
         }
         
         public async Task<List<Post>> GetAllPostsWithDetails()
         {
-            return await _postRepository.GetAllPosts();
+            return await _postRepository.GetAllPostsWithDetails();
         }
-
+        
         public async Task<Post> GetPost(Guid id)
         {
-            return await _postRepository.GetPostById(id);
+            return await _postRepository.GetById(id);
+        }
+
+        public async Task<Post> GetDetailsPost(Guid id)
+        {
+            return await _postRepository.GetDetailsPost(id);
         }
         
         public async Task<Post> UpdatePost(Guid id, Post post)
         {
-            return await _genericRepository.Update(id, post);
+            return await _postRepository.Update(id, post);
         }   
         
         public async Task<bool> DeletePost(Guid id)
         {
-            return await _genericRepository.Delete(id);
+            return await _postRepository.Delete(id);
         }
-        
     }
 }

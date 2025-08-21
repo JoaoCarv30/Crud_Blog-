@@ -1,26 +1,21 @@
 ﻿using Crud_Blog.Context;
 using Crud_Blog.Entities;
+using Crud_Blog.Generics;
+using Crud_Blog.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace Crud_Blog.Repositories
 {
-    public class PostRepository 
+    public class PostRepository : BaseRepository<Post>, IPostRepository
     {
         private readonly CrudBlogContext _context;
         
-        public PostRepository(CrudBlogContext context)
+        public PostRepository(CrudBlogContext context) : base(context)
         {
             _context = context;
         }
-        
-        public async Task<Post> CretePost(Post post)
-        { 
-            _context.Add(post);
-            await _context.SaveChangesAsync();
-            return post;
-        }
 
-        public async Task<List<Post>> GetAllPosts()
+        public async Task<List<Post>> GetAllPostsWithDetails()
         {
             var posts = await _context.Post.Include(c => c.Comment)
                 .Include(u => u.User)
@@ -29,7 +24,7 @@ namespace Crud_Blog.Repositories
             return posts;
         }
 
-        public async Task<Post> GetPostById(Guid id)
+        public async Task<Post> GetDetailsPost(Guid id)
         {
             var post = await _context.Post
                 .Include(c => c.Comment)
@@ -40,28 +35,7 @@ namespace Crud_Blog.Repositories
             return post;
         }
 
-        public async Task<Post> UpdatePost(Guid id, Post post)
-        {
-            var existingPost = await _context.Post.FindAsync(id); 
-            if (existingPost == null)
-                throw new KeyNotFoundException($"Post with id {id} not found");   
-            
-            existingPost.Title = post.Title; 
-            existingPost.Description = post.Description; 
-            existingPost.Image = post.Image; 
-            
-            return existingPost;
-        }
-        
-        public async Task<String> DeletePost(Guid id)
-        {
-            var existingPost = await _context.Post.FindAsync(id); 
-            if (existingPost == null)
-                throw new KeyNotFoundException($"Post with id {id} not found");   
-            _context.Post.Remove(existingPost);
-            
-            return "Post deleted successfully";
-        }
+    
         
         
     }

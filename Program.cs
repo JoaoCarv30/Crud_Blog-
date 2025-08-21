@@ -1,6 +1,7 @@
 using Crud_Blog.Context;
 using Crud_Blog.Generics;
 using Crud_Blog.Repositories;
+using Crud_Blog.Repositories.Interfaces;
 using Crud_Blog.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,14 +16,15 @@ builder.Services.AddControllers()
     });
 
 
-builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 
-builder.Services.AddScoped<UserRepository>();
-builder.Services.AddScoped<UserService>();
-builder.Services.AddScoped<PostRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IPostRepository, PostRepository>();
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+
 builder.Services.AddScoped<PostService>();
-builder.Services.AddScoped<CommentRepository>();
 builder.Services.AddScoped<CommentService>();
+builder.Services.AddScoped<UserService>();
 
 
 builder.Services.AddOpenApi();

@@ -1,8 +1,6 @@
-﻿using Crud_Blog.Context;
-using Crud_Blog.Entities;
+﻿using Crud_Blog.Entities;
 using Crud_Blog.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace Crud_Blog.Controllers;
 
@@ -11,7 +9,6 @@ namespace Crud_Blog.Controllers;
 public class PostController : ControllerBase
 {
     private readonly PostService _postService;
-
     public PostController(PostService postService)
     {
         _postService = postService;
@@ -44,7 +41,13 @@ public class PostController : ControllerBase
         var post = await _postService.GetPost(id);
         return Ok(post);
     }
-
+    
+    [HttpGet("Details/{id}")]
+    public async Task<IActionResult> GetDetailsPostById(Guid id)
+    {
+        var post = await _postService.GetDetailsPost(id);
+        return Ok(post);
+    }
 
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdatePost(Guid id, Post? post)

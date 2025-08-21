@@ -1,20 +1,13 @@
-﻿using Crud_Blog.Context;
-using Crud_Blog.Entities;
+﻿using Crud_Blog.Entities;
 using Crud_Blog.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-
 namespace Crud_Blog.Controllers;
-
 
 [Route("[controller]")]
 [ApiController]
-
 public class UserController : ControllerBase
 {
-
     private readonly UserService _userService;
-
     public UserController(UserService userService)
     {
         _userService = userService;
@@ -34,7 +27,6 @@ public class UserController : ControllerBase
         return Ok(AllUsers);
     }
     
-    
     [HttpGet("AllInformations")]
     public async Task<IActionResult> GetAllUsersInformations()
     {
@@ -49,6 +41,15 @@ public class UserController : ControllerBase
       if (user == null)
           return NotFound("No user found");
       return Ok(user);
+    }
+    
+    [HttpGet("Detail/{id}")]
+    public async Task<IActionResult> GetUserByIdDetails(Guid id)
+    {
+        var user = await _userService.GetUserByIdDetails(id);
+        if (user == null)
+            return NotFound("No user found");
+        return Ok(user);
     }
 
     [HttpPut("{id}")]

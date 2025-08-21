@@ -1,15 +1,16 @@
 ﻿using Crud_Blog.Context;
 using Crud_Blog.Repositories;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace Crud_Blog.Generics
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
         private readonly CrudBlogContext _context;
         private readonly DbSet<T> _dbSet;
 
-        public GenericRepository(CrudBlogContext context)
+        public BaseRepository(CrudBlogContext context)
         {
             _context = context;
             _dbSet = _context.Set<T>();
@@ -55,5 +56,11 @@ namespace Crud_Blog.Generics
             await _context.SaveChangesAsync();
             return true;
         }
+
+        public async Task<bool> GetByExpression(Expression<Func<T, bool>> expression)
+        {
+            return await _dbSet.AnyAsync(expression);
+        } 
+        
     }
 }

@@ -11,7 +11,6 @@ namespace Crud_Blog.Controllers;
 public class CommentController : ControllerBase
 {
     private readonly CommentService _commentService;
-
     public CommentController(CommentService commentService)
     {
         _commentService = commentService;
