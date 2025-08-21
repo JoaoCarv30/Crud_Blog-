@@ -30,6 +30,13 @@ public class PostController : ControllerBase
         var AllPosts = await _postService.GetAllPosts();
         return Ok(AllPosts);
     }
+    
+    [HttpGet("AllInformations")]
+    public async Task<IActionResult> GetAllPostsWithInformations()
+    {
+        var AllPosts = await _postService.GetAllPostsWithDetails();
+        return Ok(AllPosts);
+    }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetPostById(Guid id)
