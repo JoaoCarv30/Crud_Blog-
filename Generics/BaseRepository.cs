@@ -61,6 +61,5 @@ namespace Crud_Blog.Generics
         {
             return await _dbSet.AnyAsync(expression);
         } 
-        
     }
 }

@@ -48,10 +48,11 @@ public class PostController : ControllerBase
         var post = await _postService.GetDetailsPost(id);
         return Ok(post);
     }
-
+    
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdatePost(Guid id, Post? post)
+    public async Task<IActionResult> UpdatePost(Guid id, Post post)
     {
+        post.Id = id; 
         await _postService.UpdatePost(id, post);
         return Ok(post);
     }

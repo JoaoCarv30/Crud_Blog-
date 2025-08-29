@@ -1,4 +1,6 @@
-﻿using Crud_Blog.Entities;
+﻿using AutoMapper;
+using Crud_Blog.Dtos;
+using Crud_Blog.Entities;
 using Crud_Blog.Services;
 using Microsoft.AspNetCore.Mvc;
 namespace Crud_Blog.Controllers;
@@ -8,24 +10,37 @@ namespace Crud_Blog.Controllers;
 public class UserController : ControllerBase
 {
     private readonly UserService _userService;
-    public UserController(UserService userService)
+    private readonly IMapper _mapper;
+    public UserController(UserService userService, IMapper mapper)
     {
         _userService = userService;
+        _mapper = mapper;
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateUser(User user)
+    public async Task<IActionResult> CreateUser(UserDto userDto)
     {
+        var user = _mapper.Map<User>(userDto);
         await _userService.CreateUser(user);
-        return Ok(user);
+        return Ok(userDto);
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAllUsers()
+    public async Task<ActionResult<List<UserDto>>> GetAllUsers()
     {
-        var AllUsers = await _userService.GetAllUsers(); 
-        return Ok(AllUsers);
+        var allUsers = await _userService.GetAllUsers(); 
+        var userDtos = _mapper.Map<List<UserDto>>(allUsers);
+        return Ok(userDtos);
     }
+    
+    [HttpGet("Basic")]
+    public async Task<ActionResult<List<UserBasicDto>>> GetAllBasicUsers()
+    {
+        var allUsers = await _userService.GetAllUsers(); 
+        var userDtos = _mapper.Map<List<UserBasicDto>>(allUsers);
+        return Ok(userDtos);
+    }
+
     
     [HttpGet("AllInformations")]
     public async Task<IActionResult> GetAllUsersInformations()
@@ -38,8 +53,6 @@ public class UserController : ControllerBase
     public async Task<IActionResult> GetUserById(Guid id)
     {
       var user = await _userService.GetUserById(id);
-      if (user == null)
-          return NotFound("No user found");
       return Ok(user);
     }
     

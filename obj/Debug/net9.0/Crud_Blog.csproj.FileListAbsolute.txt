@@ -131,3 +131,5 @@ C:\Dev\Testes\Crud_Blog\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspac
 C:\Dev\Testes\Crud_Blog\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Dev\Testes\Crud_Blog\bin\Debug\net9.0\MySqlConnector.dll
 C:\Dev\Testes\Crud_Blog\bin\Debug\net9.0\Pomelo.EntityFrameworkCore.MySql.dll
+C:\Dev\Testes\Crud_Blog\bin\Debug\net9.0\AutoMapper.dll
+C:\Dev\Testes\Crud_Blog\bin\Debug\net9.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

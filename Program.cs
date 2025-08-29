@@ -15,7 +15,6 @@ builder.Services.AddControllers()
         opt.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
     });
 
-
 builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -26,16 +25,22 @@ builder.Services.AddScoped<PostService>();
 builder.Services.AddScoped<CommentService>();
 builder.Services.AddScoped<UserService>();
 
-
 builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen();
 
+
+
+// database connection
 var MySqlConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<CrudBlogContext>(options =>
     options.UseMySql(MySqlConnectionString, ServerVersion.AutoDetect(MySqlConnectionString)));
 
-var app = builder.Build();
 
+// Auto Mapper Configurations
+builder.Services.AddAutoMapper(typeof(Program)); 
+
+
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
