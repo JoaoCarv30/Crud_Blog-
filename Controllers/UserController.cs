@@ -43,21 +43,23 @@ public class UserController : ControllerBase
 
     
     [HttpGet("AllInformations")]
-    public async Task<IActionResult> GetAllUsersInformations()
+    public async Task<ActionResult<List<UserDto>>>GetAllUsersInformations()
     {
         var AllUsers = await _userService.GetAllUsersWithAllInformations(); 
-        return Ok(AllUsers);
+       var UserListDto = _mapper.Map<List<UserDto>>(AllUsers);
+        return Ok(UserListDto);
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetUserById(Guid id)
+    public async Task<ActionResult<UserBasicDto>> GetUserById(Guid id)
     {
       var user = await _userService.GetUserById(id);
-      return Ok(user);
+      var userDto = _mapper.Map<UserBasicDto>(user);
+      return Ok(userDto);
     }
     
     [HttpGet("Detail/{id}")]
-    public async Task<IActionResult> GetUserByIdDetails(Guid id)
+    public async Task<ActionResult<UserDto>> GetUserByIdDetails(Guid id)
     {
         var user = await _userService.GetUserByIdDetails(id);
         if (user == null)

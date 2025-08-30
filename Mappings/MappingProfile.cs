@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using Crud_Blog.Dtos;
+using Crud_Blog.Dtos.Comments;
+using Crud_Blog.Dtos.Posts;
 using Crud_Blog.Entities;
 
 namespace Crud_Blog.Mappings
@@ -15,7 +17,11 @@ public class MappingProfile : Profile
         #endregion
         
         #region PostsMappings
-        
+        CreateMap<Post, PostsDto>().ReverseMap();
+        #endregion
+
+        #region CommentsMappings
+        CreateMap<Comment, CommentsDto>().ReverseMap();
         #endregion
 
     }
