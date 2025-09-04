@@ -67,17 +67,22 @@ public class UserController : ControllerBase
         return Ok(user);
     }
 
+    
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateUser(Guid id, User dto)
+    public async Task<ActionResult<UserDto>> UpdateUser(Guid id, UpdateUserDto dto)
     {
-        var user = await _userService.GetUserById(id); 
+        var user = await _userService.GetUserById(id);
         if (user == null)
-            return NotFound("No user found"); 
-        user.Name = dto.Name; 
-        user.Image = dto.Image; 
+            return NotFound("User not found");
+
+        _mapper.Map(dto, user); 
+
         var updatedUser = await _userService.UpdateUser(user);
-        return Ok(updatedUser);
+        var updatedDto = _mapper.Map<UserDto>(updatedUser);
+
+        return Ok(updatedDto);
     }
+
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteUser(Guid id)

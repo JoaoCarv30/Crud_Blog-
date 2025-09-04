@@ -14,10 +14,12 @@ public class MappingProfile : Profile
         #region UsersMappings
         CreateMap<User, UserDto>().ReverseMap();
         CreateMap<User, UserBasicDto>();
+        CreateMap<User, UpdateUserDto>().ReverseMap();
         #endregion
         
         #region PostsMappings
         CreateMap<Post, PostsDto>().ReverseMap();
+        CreateMap<Post, PostsBasicDto>();
         #endregion
 
         #region CommentsMappings

@@ -1,4 +1,5 @@
-﻿using Crud_Blog.Context;
+﻿using AutoMapper;
+using Crud_Blog.Context;
 using Crud_Blog.Entities;
 using Crud_Blog.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -11,9 +12,11 @@ namespace Crud_Blog.Controllers;
 public class CommentController : ControllerBase
 {
     private readonly CommentService _commentService;
-    public CommentController(CommentService commentService)
+    private readonly IMapper _mapper;
+    public CommentController(CommentService commentService, IMapper mapper)
     {
         _commentService = commentService;
+        _mapper = mapper;
     }
 
     [HttpPost]
