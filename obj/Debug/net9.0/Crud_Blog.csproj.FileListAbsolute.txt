@@ -133,3 +133,12 @@ C:\Dev\Testes\Crud_Blog\bin\Debug\net9.0\MySqlConnector.dll
 C:\Dev\Testes\Crud_Blog\bin\Debug\net9.0\Pomelo.EntityFrameworkCore.MySql.dll
 C:\Dev\Testes\Crud_Blog\bin\Debug\net9.0\AutoMapper.dll
 C:\Dev\Testes\Crud_Blog\bin\Debug\net9.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Dev\Testes\Crud_Blog\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Dev\Testes\Crud_Blog\bin\Debug\net9.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Dev\Testes\Crud_Blog\bin\Debug\net9.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Dev\Testes\Crud_Blog\bin\Debug\net9.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Dev\Testes\Crud_Blog\bin\Debug\net9.0\Microsoft.IdentityModel.Logging.dll
+C:\Dev\Testes\Crud_Blog\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.dll
+C:\Dev\Testes\Crud_Blog\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Dev\Testes\Crud_Blog\bin\Debug\net9.0\Microsoft.IdentityModel.Tokens.dll
+C:\Dev\Testes\Crud_Blog\bin\Debug\net9.0\System.IdentityModel.Tokens.Jwt.dll

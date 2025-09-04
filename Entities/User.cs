@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace Crud_Blog.Entities;
 
-public class User : Entity
+public class User : IdentityUser<Guid>
 {
     [Required]
     public string Name { get; set; }

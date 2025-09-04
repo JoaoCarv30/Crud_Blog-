@@ -17,7 +17,7 @@ public class UserRepository : BaseRepository<User>, IUserRepository
 
     public async Task<List<User>> GetAllUsersWithDetails()
     {
-        return await _context.User
+        return await _context.Users
             .Include(u => u.Posts)!
             .ThenInclude(p => p.Comment)
             .ToListAsync();
@@ -25,7 +25,7 @@ public class UserRepository : BaseRepository<User>, IUserRepository
         
     public async Task<User> GetUserDetails(Guid id)
     {
-        var user = await _context.User
+        var user = await _context.Users
             .Include(u => u.Posts)!
             .ThenInclude(p => p.Comment)
             .FirstOrDefaultAsync(u => u.Id == id);
