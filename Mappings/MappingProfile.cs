@@ -24,6 +24,7 @@ public class MappingProfile : Profile
 
         #region CommentsMappings
         CreateMap<Comment, CommentsDto>().ReverseMap();
+        CreateMap<Comment, CommentsBasicDto>().ReverseMap();
         #endregion
 
     }

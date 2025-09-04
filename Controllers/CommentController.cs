@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Crud_Blog.Context;
+using Crud_Blog.Dtos.Comments;
 using Crud_Blog.Entities;
 using Crud_Blog.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -20,17 +21,19 @@ public class CommentController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateComment(Comment? comment)
+    public async Task<ActionResult<CommentsDto>> CreateComment(CommentsDto? comment)
     {
-        await _commentService.CreateComment(comment); 
-        return Ok();
+        var entityComment = _mapper.Map<Comment>(comment);
+        await _commentService.CreateComment(entityComment); 
+        return Ok(comment);
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAllComents()
+    public async Task<ActionResult<List<CommentsDto>>> GetAllComents()
     {
       var Comments =  await _commentService.GetAllComments(); 
-      return Ok(Comments);
+        var CommentsDto = _mapper.Map<List<CommentsDto>>(Comments);
+      return Ok(CommentsDto);
     }
 
     [HttpGet("{id}")]
@@ -41,14 +44,15 @@ public class CommentController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(Guid id, Comment? dto)
+    public async Task<ActionResult<CommentsBasicDto>> Update(Guid id, CommentsDto? comment)
     {
         var Comment =  await _commentService.GetCommentById(id); 
         if (Comment == null)
             return NotFound("No comment found for this post"); 
-        Comment.Description = dto.Description;
+        Comment.Description = comment.Description;
         var updatedComment = await _commentService.UpdateComment(id, Comment);
-        return Ok(updatedComment);
+        var updatedCommentDto =   _mapper.Map<CommentsBasicDto>(updatedComment);
+        return Ok(updatedCommentDto);
     } 
 
     [HttpDelete("{id}")]

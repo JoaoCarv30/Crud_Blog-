@@ -1,8 +1,7 @@
 ﻿namespace Crud_Blog.Dtos.Comments
 {
-    public class CommentsDto
+    public class CommentsBasicDto
     {
-        public Guid Id { get; set; }
         public string Description { get; set; }
     }
-}   
+}
