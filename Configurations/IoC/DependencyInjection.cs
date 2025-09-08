@@ -22,6 +22,8 @@ public static class DependencyInjection
         services.AddScoped<PostService>();
         services.AddScoped<CommentService>();
         services.AddScoped<UserService>();
+        services.AddScoped<AuthService>();
+
 
         return services;
     }

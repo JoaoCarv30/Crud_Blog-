@@ -5,15 +5,15 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Crud_Blog.Configurations.Identity
 {
-public static class IdentityConfiguration
-{
-    public static IServiceCollection AddIdentityConfiguration(this IServiceCollection services)
+    public static class IdentityConfiguration
     {
-        services.AddIdentity<User, IdentityRole<Guid>>()
-            .AddEntityFrameworkStores<CrudBlogContext>()
-            .AddDefaultTokenProviders();
+        public static IServiceCollection AddIdentityConfiguration(this IServiceCollection services)
+        {
+            services.AddIdentity<User, IdentityRole<Guid>>()
+                .AddEntityFrameworkStores<CrudBlogContext>()
+                .AddDefaultTokenProviders();
 
-        return services;
+            return services;
+        }
     }
-}
 }

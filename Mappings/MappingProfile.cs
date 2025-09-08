@@ -15,6 +15,7 @@ public class MappingProfile : Profile
         CreateMap<User, UserDto>().ReverseMap();
         CreateMap<User, UserBasicDto>();
         CreateMap<User, UpdateUserDto>().ReverseMap();
+        CreateMap<User, RegisterUserDto>().ReverseMap();
         #endregion
         
         #region PostsMappings
