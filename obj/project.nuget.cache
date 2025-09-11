@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XFrAD2vgZNg=",
+  "dgSpecHash": "X5h1Rp3nWQ8=",
   "success": true,
-  "projectFilePath": "C:\\Dev\\Testes\\Crud_Blog\\Crud_Blog.csproj",
+  "projectFilePath": "C:\\Dev\\Crud_Blog-\\Crud_Blog.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\joao\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\joao\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

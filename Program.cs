@@ -8,6 +8,18 @@ using Crud_Blog.Configurations.Swagger;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy
+            .AllowAnyOrigin()    // Permite qualquer origem
+            .AllowAnyMethod()    // Permite qualquer método (GET, POST, PUT, DELETE, etc)
+            .AllowAnyHeader();   // Permite qualquer header
+    });
+});
+
+
 builder.Services.AddControllersConfiguration();
 builder.Services.AddDependencyInjection();
 builder.Services.AddDatabaseConfiguration(builder.Configuration);
@@ -22,6 +34,8 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwaggerConfiguration();
 }
+
+app.UseCors("AllowAll");
 
 app.UseHttpsRedirection();
 app.UseAuthentication();

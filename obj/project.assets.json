@@ -3897,11 +3897,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Dev\\Testes\\Crud_Blog\\Crud_Blog.csproj",
+      "projectUniqueName": "C:\\Dev\\Crud_Blog-\\Crud_Blog.csproj",
       "projectName": "Crud_Blog",
-      "projectPath": "C:\\Dev\\Testes\\Crud_Blog\\Crud_Blog.csproj",
+      "projectPath": "C:\\Dev\\Crud_Blog-\\Crud_Blog.csproj",
       "packagesPath": "C:\\Users\\joao\\.nuget\\packages\\",
-      "outputPath": "C:\\Dev\\Testes\\Crud_Blog\\obj\\",
+      "outputPath": "C:\\Dev\\Crud_Blog-\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

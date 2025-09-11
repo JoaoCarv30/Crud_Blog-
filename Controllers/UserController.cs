@@ -62,9 +62,10 @@ public class UserController : ControllerBase
     public async Task<ActionResult<UserDto>> GetUserByIdDetails(Guid id)
     {
         var user = await _userService.GetUserByIdDetails(id);
+        var userDto = _mapper.Map<UserDto>(user);
         if (user == null)
             return NotFound("No user found");
-        return Ok(user);
+        return Ok(userDto);
     }
 
     
