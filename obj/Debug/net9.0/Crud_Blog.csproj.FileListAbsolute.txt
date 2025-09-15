@@ -286,3 +286,6 @@ C:\Dev\Crud_Blog-\obj\Debug\net9.0\refint\Crud_Blog.dll
 C:\Dev\Crud_Blog-\obj\Debug\net9.0\Crud_Blog.pdb
 C:\Dev\Crud_Blog-\obj\Debug\net9.0\Crud_Blog.genruntimeconfig.cache
 C:\Dev\Crud_Blog-\obj\Debug\net9.0\ref\Crud_Blog.dll
+C:\Dev\Crud_Blog-\obj\Debug\net9.0\swae.build.ex.cache
+C:\Dev\Crud_Blog-\bin\Debug\net9.0\global.json
+C:\Dev\Crud_Blog-\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

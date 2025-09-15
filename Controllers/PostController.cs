@@ -64,7 +64,7 @@ public class PostController : ControllerBase
     {
         var postById = await _postService.GetPost(id);
         if (postById == null)
-            return NotFound("No post found for this id");
+            return NotFound("No post found for this id"); 
         postById.Title = post.Title;
         postById.Description = post.Description;
         var updatedPost = await _postService.UpdatePost(id, postById);
